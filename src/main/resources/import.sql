@@ -1,0 +1,1 @@
+INSERT INTO Language (id, languageName) values (1, 'English');
