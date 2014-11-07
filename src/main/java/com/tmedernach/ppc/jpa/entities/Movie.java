@@ -1,27 +1,19 @@
-package com.tmedernach.ppc.jpa;
+package com.tmedernach.ppc.jpa.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.tmedernach.ppc.jpa.Studio;
-
-import javax.persistence.ManyToOne;
-
-import com.tmedernach.ppc.jpa.Scene;
-
-import java.sql.Date;
-import java.util.Set;
-import java.util.HashSet;
-
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-
-import com.tmedernach.ppc.jpa.Language;
 
 /**
  * Entity implementation class for Entity: Movie
@@ -41,9 +33,10 @@ public class Movie implements Serializable
    @NotEmpty
    private String movieName;
 
-   @ManyToOne
+   @ManyToOne (fetch = FetchType.EAGER)
    private Studio studio;
 
+   
    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
    private Set<Scene> scenes = new HashSet<Scene>();
 
@@ -51,11 +44,11 @@ public class Movie implements Serializable
 
    private String qualityGrade;
    
-   private Date releaseDate;
+   private String releaseDate;
    
    @ManyToOne(fetch = FetchType.EAGER)
    private Language language;
-
+   
    public Long getId()
    {
       return id;
@@ -127,12 +120,16 @@ public class Movie implements Serializable
 		this.qualityGrade = qualityGrade;
 	}
 
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+	
+	public void addScene(Scene s){
+		scenes.add(s);
 	}
 
 }

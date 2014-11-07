@@ -1,4 +1,4 @@
-package com.tmedernach.ppc.jpa;
+package com.tmedernach.ppc.jpa.entities;
 
 import javax.persistence.Entity;
 
@@ -12,7 +12,7 @@ import javax.persistence.Version;
 
 import java.lang.Override;
 
-import com.tmedernach.ppc.jpa.Talent;
+import com.tmedernach.ppc.jpa.entities.Talent;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;

@@ -1,19 +1,20 @@
-package com.tmedernach.ppc.jpa;
+package com.tmedernach.ppc.jpa.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import com.tmedernach.ppc.jpa.Movie;
-import java.util.Set;
-import java.util.HashSet;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import com.tmedernach.ppc.jpa.WebSite;
 
+@XmlRootElement
 @Entity
 public class Studio
 {
@@ -30,7 +31,7 @@ public class Studio
    private Set<Movie> movies = new HashSet<Movie>();
 
    @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-   private Set<WebSite> websites = new HashSet<WebSite>();
+   private Set<Website> websites = new HashSet<Website>();
 
    public Set<Movie> getMovies()
    {
@@ -42,14 +43,26 @@ public class Studio
       this.movies = movies;
    }
 
-   public Set<WebSite> getWebsites()
+   public Set<Website> getWebsites()
    {
       return this.websites;
    }
 
-   public void setWebsites(final Set<WebSite> websites)
+   public void setWebsites(final Set<Website> websites)
    {
       this.websites = websites;
    }
+
+public String getStudioName() {
+	return studioName;
+}
+
+public void setStudioName(String studioName) {
+	this.studioName = studioName;
+}
+
+	public void addMovie(Movie m){
+		movies.add(m);
+	}
 
 }

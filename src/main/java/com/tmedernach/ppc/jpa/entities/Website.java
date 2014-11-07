@@ -1,33 +1,32 @@
-package com.tmedernach.ppc.jpa;
+package com.tmedernach.ppc.jpa.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import com.tmedernach.ppc.jpa.Studio;
 import javax.persistence.ManyToOne;
-import com.tmedernach.ppc.jpa.Scene;
-import java.util.Set;
-import java.util.HashSet;
 import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.Column;
-import java.lang.Override;
 
 @Entity
-public class WebSite
+public class Website
 {
 
    @Id
    @GeneratedValue
    private Long id;
+   
    @ManyToOne
    private Studio studio;
 
    @OneToMany(mappedBy = "website", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
    private Set<Scene> scenes = new HashSet<Scene>();
 
-   @Column(length = 100)
+   @Column(length = 256)
    private String siteName;
 
    public Studio getStudio()
@@ -60,6 +59,14 @@ public class WebSite
       this.siteName = siteName;
    }
 
+   public Long getId() {
+	   return id;
+   }
+	
+   public void setId(Long id) {
+	   this.id = id;
+   }
+	
    @Override
    public String toString()
    {
@@ -68,5 +75,10 @@ public class WebSite
          result += "siteName: " + siteName;
       return result;
    }
+   
+   public void addScene(Scene s){
+	   scenes.add(s);
+   }
+
 
 }

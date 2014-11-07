@@ -1,16 +1,21 @@
-package com.tmedernach.ppc.jpa;
+package com.tmedernach.ppc.jpa.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import java.util.Set;
 import java.util.HashSet;
-import com.tmedernach.ppc.jpa.TalentName;
+
+import com.tmedernach.ppc.jpa.entities.TalentName;
+
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+
 import java.lang.Override;
 import java.util.Date;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
